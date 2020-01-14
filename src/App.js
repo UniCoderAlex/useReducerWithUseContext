@@ -1,26 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
+import { MessageContext } from './context/MessageContext'
 import './App.css';
+import { useMessageReducer } from './hooks/useMessageReducer';
+import MessageContainer from './components/MessageContainer';
+import MessageForm from './components/MessageForm'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    const [state, dispatch] = useMessageReducer([])
+
+    return (
+        <MessageContext.Provider value={{state, dispatch}}>
+            <MessageForm />
+            <MessageContainer />
+        </MessageContext.Provider>
+    );
 }
 
 export default App;
